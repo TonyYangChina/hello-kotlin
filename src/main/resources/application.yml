@@ -1,0 +1,71 @@
+server:
+  port: 8081
+  # 开启压缩
+  compression:
+    # 开启
+    enabled: true
+    # 执行压缩的阈值，默认为2048
+    min-response-size: 1024
+    # 指定要压缩的MIME type，多个以逗号分隔
+    mime-types:
+      - application/json
+      - application/xml
+      - text/xml
+      - text/plain
+  servlet:
+    context-path: /hello-kotlin
+spring:
+  # profiles: dev
+  datasource:
+    # 个人服务器 的 数据库服务器
+    url: jdbc:mysql://129.204.120.115:3306/mins?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: mins*#56
+    #url: jdbc:mysql://192.168.97.180:3306/wjdbmgrapp?autoReconnect=true
+    #username: mgrapp_all
+    #password: mgrapp123!@#
+    driver-class-name: com.mysql.jdbc.Driver
+    platform: mysql
+    # v2.0前的配置
+    initialize: true
+    sql-script-encoding: UTF-8
+    # v2.o后的配置初始化数据
+    # initialization-mode: always
+  jmx:
+    enabled: false
+  data:
+    mongodb:
+      # uri配置 mongodb:/用户名:密码@IP:端口/数据库名称
+      uri: mongodb://admin:123456@129.204.120.115:27017/
+      authentication-database: admin
+      #host: 129.204.120.115
+      #port: 27017
+      #username: admin
+      #password: 123456
+      database: app
+  redis:
+    host: 129.204.120.115
+    port: 6379
+    database: 5
+    jedis:
+      pool:
+        max-active: 12
+        max-wait: 1000
+        max-idle: 8
+        min-idle: 0
+    timeout: 5000
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: none
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+
+
+logging:
+
+  level:
+    org.hibernate.SQL: DEBUG
+    org.spring: WARN
+  # path: /home/www/log/manager_app
+  # path: ./logs
