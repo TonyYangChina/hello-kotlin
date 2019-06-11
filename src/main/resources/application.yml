@@ -26,11 +26,9 @@ spring:
     #password: mgrapp123!@#
     driver-class-name: com.mysql.jdbc.Driver
     platform: mysql
-    # v2.0前的配置
-    initialize: true
     sql-script-encoding: UTF-8
     # v2.o后的配置初始化数据
-    # initialization-mode: always
+    initialization-mode: always
   jmx:
     enabled: false
   data:

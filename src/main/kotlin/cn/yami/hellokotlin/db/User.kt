@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
+import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -20,23 +21,24 @@ data class User(
         @Column(name = "name")
         val name: String,
         @Column(name = "status")
-        val status: Int,
+        var status: Int,
         @Column(name = "token")
-        val token: String,
+        var token: String,
         @Column(name = "phone")
-        val phone: String? = "",
+        var phone: String? = "",
         @Column(name = "valid_code")
-        val validCode: String
+        var validCode: String
 )
 
 @Repository
+@Suppress("unused")
 interface UserReponsitory : JpaRepository<User, Int> {
     // 查询
     fun findByTokenAndStatus(token: String, status: Int = 1): User?
 
     fun findByPhoneAndStatus(phone: String, status: Int = 1): User?
 
-    fun findById(id: String): User?
+    override fun findById(id: Int): Optional<User>
 
     // 更新
     @Transactional
@@ -44,7 +46,7 @@ interface UserReponsitory : JpaRepository<User, Int> {
     @Query("UPDATE user u SET u.token =:token, u.valid_code =:validCode WHERE u.id =:id")
     fun updateUserTokenAndValidCode(@Param("token") token: String,
                                     @Param("validCode") validCode: String,
-                                    @Param("id") id: String)
+                                    @Param("id") id: Int)
 
 
 }
