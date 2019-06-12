@@ -30,6 +30,9 @@ data class User(
         var validCode: String
 )
 
+
+// TODO JPA是什么？需要注意那些点，什么原理？
+
 @Repository
 @Suppress("unused")
 interface UserReponsitory : JpaRepository<User, Int> {
