@@ -4,6 +4,7 @@ import cn.yami.hellokotlin.common.constant.Contants
 import cn.yami.hellokotlin.common.constant.ErrorCode
 import cn.yami.hellokotlin.db.User
 import cn.yami.hellokotlin.db.UserReponsitory
+import cn.yami.hellokotlin.db.validateBeforeSave
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -70,6 +71,31 @@ class UserServiceImpl : UserService {
     }
 
 
+    fun saveUser(user: User) {
+        // 1. 局部函数
+        // 局部函数可以访问所在函数的参数和变量
+        // fun validate(user: User,
+        /*fun validate(value: String,
+                     fieldName: String) {
+            if (value.isEmpty()) {
+                throw IllegalArgumentException(
+                        "cannot save user ${user.id}: empty $fieldName")
+            }
+        }*/
+
+        // validate(user, user.name, "name")
+        // validate(user.name, "name")
+        // 对于可能存在null的属性，
+        // validate(user, user.phone.toString(),"phone")
+        // roomList?.size ?: 0
+        /*validate(user.phone
+                ?:throw java.lang.IllegalArgumentException("cannot save user ${user.id}: empty phone"),
+                "phone")*/
+
+        // 2.使用扩展函数
+        user.validateBeforeSave()
+
+    }
 
 
 
