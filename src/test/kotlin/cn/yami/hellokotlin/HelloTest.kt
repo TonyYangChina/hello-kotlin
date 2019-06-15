@@ -1,6 +1,7 @@
 package cn.yami.hellokotlin
 
 import cn.yami.hellokotlin.common.constant.ProductType
+import cn.yami.hellokotlin.common.util.lastCharA
 import cn.yami.hellokotlin.common.util.joinToString as joinStr
 // 使用as重命名函数
 import cn.yami.hellokotlin.common.util.lastChar as last
@@ -40,6 +41,8 @@ class HelloTest {
 
         val arrlist = listOf("February", "June", "July")
 
+
+        // ###################### 扩展函数 ###################
         // println("默认参数拼接字符：" + joinToString(arrlist))
         println("默认参数拼接字符：" + arrlist.joinStr())
         /*println("配置参数拼接字符：" + StringUtils.joinToString(
@@ -47,7 +50,17 @@ class HelloTest {
         println("配置参数拼接字符：" + StringUtils.joinToString(
                 arrlist, separator = "-", prefix = "(", suffix = ")"))
         */
+        // "happy"是接收者对象
         println("happy的最后一个字符串是：${"happy".last()}")
+
+        val sb = StringBuffer("kotlin?")
+        sb.lastCharA = '!'
+        println("属性扩展：$sb")
+
+
+        val strings: List<String> = listOf("first", "second", "third")
+        println(strings.last())
+
         // ############ NPE #############
         var a: String = "abc"
         a = "bcd"
@@ -159,6 +172,10 @@ class HelloTest {
         val reader = BufferedReader(StringReader("df"))
         readNumber(reader)
 
+
+        // 中缀调用
+        val (number, name) = 1 to "yami"
+        println("$number -  $name")
 
     }
 
