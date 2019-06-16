@@ -109,6 +109,7 @@ class UserServiceImpl : UserService {
     }
 
     override fun findUserByToken(token: String): User? {
+
         val user: User? = userRepository.findByTokenAndStatus(token, 1)
         return user
     }

@@ -17,6 +17,7 @@ import org.aspectj.lang.reflect.MethodSignature
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.validation.BindingResult
+import java.lang.Exception
 import java.lang.StringBuilder
 import java.util.*
 import javax.servlet.http.HttpServletRequest
@@ -26,7 +27,7 @@ import javax.servlet.http.HttpServletRequest
 @Component
 class LogAspect {
 
-    private val logger = KotlinLogging.logger {}
+    // private val logger = KotlinLogging.logger {}
 
     @Autowired
     private lateinit var userService: UserService
@@ -52,9 +53,9 @@ class LogAspect {
         // val method: Method = signature.method
         val sysLog = SysLog()
         // 请求的方法名
-        val className: String = joinPoint.target.javaClass.name
+        // val className: String = joinPoint.target.javaClass.name
         val methodName: String = signature.declaringTypeName + "." + signature.name
-        sysLog.method = "$className.$methodName()"
+        sysLog.method = "$methodName()"
         // 请求的方法参数值
         val args = joinPoint.args
         // 请求的方法参数名称
@@ -70,13 +71,16 @@ class LogAspect {
         // 获取request
         val request: HttpServletRequest = HttpContextUtil.getHttpServletRequest()
         // 获取token
-        val token: String = request.getHeader(Constants.TOKEN_HEADER_NAME)
-        val user: User? = userService.findUserByToken(token)
+        val token: String? = request.getHeader(Constants.TOKEN_HEADER_NAME)
 
+        val user: User? = null
+        if (token != null) {
+            userService.findUserByToken(token)
+        }
         // sysLog.ip = IPUtil.getIpAddress(request)
         sysLog.ip = request.remoteAddr
-        val methodOther = request.method
-        logger.info("待观察的方法名：$methodOther")
+        // val methodOther = request.method
+        // logger.info("待观察的方法名：$methodOther")
         if (null != user) {
             sysLog.userId = user.id
             sysLog.userName = user.name

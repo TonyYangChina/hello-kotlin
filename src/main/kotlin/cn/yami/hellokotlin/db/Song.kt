@@ -6,12 +6,12 @@ import javax.persistence.*
 @Table(name = "song")
 data class Song(
         @Id
-        @GeneratedValue(strategy= GenerationType.AUTO)
+        @GeneratedValue(strategy= GenerationType.IDENTITY)
         var id: Int? = null,
         var title: String? = null
 ) {
-    @ManyToOne
-    // @JoinColumn(name = "author_id")
+    @ManyToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "author_id")
     @Suppress("unused")
     var author: Author? = null
 }

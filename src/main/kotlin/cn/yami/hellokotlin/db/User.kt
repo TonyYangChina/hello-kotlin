@@ -32,7 +32,7 @@ fun User.validateBeforeSave() {
 @Table(name = "user")
 data class User(
         @Id
-        @GeneratedValue(strategy=GenerationType.AUTO)
+        @GeneratedValue(strategy= GenerationType.IDENTITY)
         val id: Int,
         @Column(name = "name")
         val name: String,

@@ -12,7 +12,7 @@ import javax.persistence.*
 @Table(name = "sys_log")
 data class SysLog(
         @Id
-        @GeneratedValue(strategy= GenerationType.AUTO)
+        @GeneratedValue(strategy= GenerationType.IDENTITY)
         val id: Int? = null,
         @Column(name = "user_id")
         var userId: Int? = null,

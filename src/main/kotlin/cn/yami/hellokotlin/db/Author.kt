@@ -12,7 +12,7 @@ import javax.transaction.Transactional
 @Table(name = "author")
 data class Author(
         @Id
-        @GeneratedValue(strategy= GenerationType.AUTO)
+        @GeneratedValue(strategy= GenerationType.IDENTITY)
         val id: Int? = null,
         val name: String? = null,
         val status: Int? = 0,
