@@ -1,6 +1,7 @@
 // @file:JvmName("StringUtils")
 package cn.yami.hellokotlin.common.util
 
+import org.apache.commons.lang3.StringUtils
 import java.lang.StringBuilder
 
 // 顶层属性
@@ -54,9 +55,13 @@ fun <T> Collection<T>.joinToString(
     return result.toString()
 }
 
-/*class StringUtils {
+/**
+ * object修饰的类为静态类，里面的方法和变量都为静态的
+ */
+object StringUtils {
 
-    companion object {*/
+
+/*companion object {*/
         // 1. 使用默认参数
         // kotlin消除静态工具类：顶层函数
         /*fun <T> joinToString(
@@ -74,5 +79,5 @@ fun <T> Collection<T>.joinToString(
             result.append(suffix)
             return result.toString()
         }*/
-/*    }
-}*/
+/*    }*/
+}
