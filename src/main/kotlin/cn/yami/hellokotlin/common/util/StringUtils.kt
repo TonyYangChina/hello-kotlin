@@ -60,6 +60,20 @@ fun <T> Collection<T>.joinToString(
  */
 object StringUtils {
 
+    fun multiply(self: Char, factor: Number): String {
+        val size = factor.toInt()
+        return when {
+            size == 0 -> ""
+            size < 0 -> throw IllegalArgumentException("multiply() should be called with a number of 0 or greater not: $size")
+            else -> {
+                val answer = StringBuilder().append(self)
+                for (i in 1 until size) {
+                    answer.append(self)
+                }
+                answer.toString()
+            }
+        }
+    }
 
 /*companion object {*/
         // 1. 使用默认参数

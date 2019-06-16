@@ -1,8 +1,7 @@
 package cn.yami.hellokotlin.common.constant
 
-class Contants {
-
-    companion object {
+@Suppress("unused")
+object Constants {
         /**
          * 公共服务的内部 token 仅用于测试及内部系统间内网调用
          */
@@ -28,7 +27,7 @@ class Contants {
         /**
          * Token Header Name
          */
-        const val Token_Header_Name: String = "x-auth-token"
+        const val TOKEN_HEADER_NAME: String = "x-auth-token"
 
         /**
          * secID header name
@@ -57,5 +56,4 @@ class Contants {
         const val MEMBERDATASERVER_APPID: Int = 10011
 
         const val MEMBERDATASERVER_MD5KEY: String = "d38f0f36bae62fdb13869710776f8e66"
-    }
 }

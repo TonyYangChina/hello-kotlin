@@ -152,13 +152,12 @@ class HelloTest {
         copy(x, any)
         any.forEach { print("$it \t") }
 
-
         // ############### 对象和属性 #############
-        println()
+        /*println()
         val author = Author(129, "yami", 1, 49, "mi", true)
         author.isAlive=false
         println("${author.name}, ${author.nickName}, " +
-                "${author.isAlive}, ${if (author.isOlder) "老人" else "年轻人"}！")
+                "${author.isAlive}, ${if (author.isOlder) "老人" else "年轻人"}！")*/
 
 
         when (ProductType.AGRICULTURAL) {
@@ -175,40 +174,42 @@ class HelloTest {
 
 
         // 类测试
-        val user1 = User(123, "yami", 1, "12233", validCode = "930506")
-        val user2 = User(456, "yami", 0, "12233", validCode = "930506")
-        val user3 = User(123, "yami", 2, "12323", validCode = "986887")
+        /*val user1 = User(123, "yami", 1, 1, validCode = "930506")
+        val user2 = User(456, "yami", 0, 0, validCode = "930506")
+        val user3 = User(123, "yami", 2, 1, validCode = "986887")*/
 
-        val set1 = hashSetOf(user1,user2,user3)
+       /* val set1 = hashSetOf(user1,user2,user3)
         println(set1)
 
-        val listed1 = listOf(user1, user2, user3)
+        val listed1 = listOf(user1, user2, user3)*/
         // 表达式1
-        listed1.maxBy { u: User -> u.id }
+        // listed1.maxBy { u: User -> u.id }
         // 类型推断
-        listed1.maxBy { u -> u.id }
+        // listed1.maxBy { u -> u.id }
         // 表达式2 成员引用
-        listed1.maxBy(User::id)
+        // listed1.maxBy(User::id)
         // 表达式3
-        listed1.maxBy{ it.id }
+        // listed1.maxBy{ it.id }
 
 
-        println(user1 == user3)
+        // println(user1 == user3)
 
-        val userStatus0 = {u: User -> u.status == 0}
+        // val userStatus0 = {u: User -> u.status == 0}
         // 对集合进行筛选，生成中间集合
         // 对集合的元素数据进行处理，+-*/等后的结果
-        val listed2 = listed1.map(userStatus0)
-        println(listed2)
+        // val listed2 = listed1.map(userStatus0)
+        // println(listed2)
         // 过滤出来
-        val listed3 = listed1.filter(userStatus0)
-        println(listed3)
-
-
+        // val listed3 = listed1.filter(userStatus0)
+        // println(listed3)
 
         // 中缀调用
         val (number, name) = 1 to "yami"
         println("$number -  $name")
+
+
+
+
 
     }
 

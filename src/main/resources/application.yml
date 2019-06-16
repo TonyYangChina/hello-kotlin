@@ -20,7 +20,7 @@ spring:
     # 个人服务器 的 数据库服务器
     url: jdbc:mysql://129.204.120.115:3306/mins?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: fdsfsfs
+    password: mins*#56
     #url: jdbc:mysql://192.168.97.180:3306/wjdbmgrapp?autoReconnect=true
     #username: mgrapp_all
     #password: mgrapp123!@#
@@ -55,13 +55,9 @@ spring:
   jpa:
     properties:
       hibernate:
-        ddl-auto: none
+        ddl-auto: update
         dialect: org.hibernate.dialect.MySQL5Dialect
-
-
-
 logging:
-
   level:
     org.hibernate.SQL: DEBUG
     org.spring: WARN

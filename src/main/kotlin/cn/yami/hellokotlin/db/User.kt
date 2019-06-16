@@ -6,10 +6,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 import javax.transaction.Transactional
 
 fun User.validateBeforeSave() {
@@ -35,17 +32,24 @@ fun User.validateBeforeSave() {
 @Table(name = "user")
 data class User(
         @Id
+        @GeneratedValue(strategy=GenerationType.AUTO)
         val id: Int,
         @Column(name = "name")
         val name: String,
         @Column(name = "status")
         var status: Int = 0,
+        @Column(name = "sex")
+        val sex: Int,
         @Column(name = "token")
         var token: String,
         @Column(name = "phone")
         var phone: String? = "",
         @Column(name = "valid_code")
-        var validCode: String
+        var validCode: String,
+        @Column(name = "confirmation")
+        var confirmation: String?,
+        @Column(name = "last_updated")
+        val lastUpdated: Date
 ) {
     /*@Column(name = "status")
     var status: Int = 0
@@ -71,7 +75,7 @@ data class User(
 
 @Repository
 @Suppress("unused")
-interface UserReponsitory : JpaRepository<User, Int> {
+interface UserRepository : JpaRepository<User, Int> {
     // 查询
     fun findByTokenAndStatus(token: String, status: Int = 1): User?
 
@@ -82,7 +86,7 @@ interface UserReponsitory : JpaRepository<User, Int> {
     // 更新
     @Transactional
     @Modifying
-    @Query("UPDATE user u SET u.token =:token, u.valid_code =:validCode WHERE u.id =:id")
+    @Query("UPDATE User u SET u.token =:token, u.validCode =:validCode WHERE u.id =:id")
     fun updateUserTokenAndValidCode(@Param("token") token: String,
                                     @Param("validCode") validCode: String,
                                     @Param("id") id: Int)

@@ -1,37 +1,42 @@
 package cn.yami.hellokotlin.db
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
+import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.query.Param
+import org.springframework.stereotype.Repository
+import javax.persistence.*
+import javax.transaction.Transactional
 
 @Entity
 @Table(name = "author")
 data class Author(
         @Id
-        val id: Int,
-        val name: String,
-        val status: Int,
-        val age: Int,
+        @GeneratedValue(strategy= GenerationType.AUTO)
+        val id: Int? = null,
+        val name: String? = null,
+        val status: Int? = 0,
+        //  val age: Int,
         @Column(name = "nick_name")
-        var nickName: String,
-        var isAlive: Boolean
+        var nickName: String? = null
 ) {
-        // 自定义访问器
-        val isOlder: Boolean
-                get() = age > 50
+        @OneToMany
+        @JoinTable(name = "author_song",joinColumns = [JoinColumn(name = "author_id")],
+                inverseJoinColumns = [JoinColumn(name="song_id")])
+        var songs: List<Song>? = ArrayList()
 }
 
-// 只有数据没有其他代码的类，即值对象
-// data 修饰class，表示是数据类
-// public 是默认可见的，可省略
-/**
- *  java属性是private，访问和设置通过get/set，kotlin如何体现？
- *      kotlin，val和var体现，声明即配置了访问器
- *      val只读，生成一个字段和一个简单getter
- *      var可写，一个字段和一个getter和setter
- *
- */
+@Repository
+@Suppress("unused")
+interface AuthorRepository : JpaRepository<Author, Int> {
+        // 查询
+        //fun findByTokenAndStatus(token: String, status: Int = 1): Author?
+        // 更新
+        @Transactional
+        @Modifying
+        @Query("UPDATE Author a SET a.name =:name WHERE a.id =:id")
+        fun updateAuthorName(@Param("name") name: String,
+                             @Param("id") id: Int)
 
 
-
+}
